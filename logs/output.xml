@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.8.10 on win32)" generated="20230509 21:25:17.039" rpa="false" schemaversion="3">
+<suite id="s1" name="Post" source="C:\Users\Daniel Chagas\Desktop\curso 2022\Robot API Expert\qaNinja\buger-eats-partner-api-test -  revisao\post.robot">
+<test id="s1-t1" name="should create a new partner" line="14">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>alias=Buger</arg>
+<arg>url=${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20230509 21:25:17.384" level="INFO">Creating Session using : alias=Buger, url=http://localhost:3333/partners, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20230509 21:25:17.384" endtime="20230509 21:25:17.385"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<arg>auth_user=qa</arg>
+<arg>auth_password=ninja</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230509 21:25:17.385" level="INFO">${headers} = {'Content-Type': 'application/json', 'auth_user': 'qa', 'auth_password': 'ninja'}</msg>
+<status status="PASS" starttime="20230509 21:25:17.385" endtime="20230509 21:25:17.385"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${filter}</var>
+<arg>name=casadoarnaldo2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20230509 21:25:17.386" level="INFO">${filter} = {'name': 'casadoarnaldo2'}</msg>
+<status status="PASS" starttime="20230509 21:25:17.386" endtime="20230509 21:25:17.386"/>
+</kw>
+<kw name="Delete One" library="RobotMongoDBLibrary.Delete">
+<arg>${MONGO_URI}</arg>
+<arg>${filter}</arg>
+<status status="PASS" starttime="20230509 21:25:17.386" endtime="20230509 21:25:19.232"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>alias=Buger</arg>
+<arg>url=${BASE_URL}</arg>
+<arg>expected_status=201</arg>
+<arg>headers=${headers}</arg>
+<arg>data={"name":"casadoarnaldo2","email":"arnaldo0@co2ntatoarna.com.br","whatsapp":"51923664813","business":"Restaurante"}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20230509 21:25:19.427" level="INFO">POST Request : url=http://localhost:3333/partners 
+ path_url=/partners 
+ headers={'User-Agent': 'python-requests/2.28.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'auth_user': 'qa', 'auth_password': 'ninja', 'Content-Length': '114'} 
+ body={"name":"casadoarnaldo2","email":"arnaldo0@co2ntatoarna.com.br","whatsapp":"51923664813","business":"Restaurante"} 
+ </msg>
+<msg timestamp="20230509 21:25:19.427" level="INFO">POST Response : url=http://localhost:3333/partners 
+ status=201, reason=Created 
+ headers={'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Access-Control-Expose-Headers': 'Authorization,auth_user,auth_password', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '41', 'ETag': 'W/"29-VgFQblfqvduwEXT6gIJFh+SmlpI"', 'Date': 'Wed, 10 May 2023 00:25:19 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={"partner_id":"645ae46f95aef77f578e8226"} 
+ </msg>
+<msg timestamp="20230509 21:25:19.428" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20230509 21:25:19.235" endtime="20230509 21:25:19.428"/>
+</kw>
+<kw name="Status Should Be" library="RequestsLibrary">
+<arg>201</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" starttime="20230509 21:25:19.430" endtime="20230509 21:25:19.430"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230509 21:25:19.431" endtime="20230509 21:25:19.435"/>
+</kw>
+<status status="PASS" starttime="20230509 21:25:17.383" endtime="20230509 21:25:19.436"/>
+</test>
+<doc>Post /partners</doc>
+<status status="PASS" starttime="20230509 21:25:17.041" endtime="20230509 21:25:19.441"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Post">Post</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
